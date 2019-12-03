@@ -81,7 +81,9 @@ variable "team" {
   default     = "UNDEF-S3-Buckets"
 }
 
+//
 // Module specific Variables
+//
 variable "enabled" {
   description = "Set to false to prevent the module from creating anything"
   default     = true
@@ -90,6 +92,17 @@ variable "enabled" {
 variable "force_destroy" {
   description = "Delete all objects in bucket on destroy"
   default     = false
+}
+
+variable "encryption" {
+  description = "The server-side encryption algorithm to use. If true, it will enable default encryption, will uses AWS S3-Managed Keys (SSE-S3)"
+  default     = false
+}
+
+variable "kms_master_key_id" {
+  description = "ARN of AWS KMS-Managed Keys (SSE-KMS)"
+  type        = "string"
+  default     = ""
 }
 
 variable "principal" {
@@ -105,4 +118,27 @@ variable "public" {
 variable "versioned" {
   description = "Version the bucket"
   default     = false
+}
+
+//
+// S3 Public restriction block
+//
+variable "block_public_acls" {
+  description = "Whether Amazon S3 should block public ACLs for this bucket"
+  default     = true
+}
+
+variable "block_public_policy" {
+  description = "Whether Amazon S3 should block public bucket policies for this bucket"
+  default     = true
+}
+
+variable "ignore_public_acls" {
+  description = "Whether Amazon S3 should ignore public ACLs for this bucket"
+  default     = true
+}
+
+variable "restrict_public_buckets" {
+  description = "Whether Amazon S3 should restrict public bucket policies for this bucket"
+  default     = true
 }
